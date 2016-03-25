@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">material</string>
+    <string name="app_name">Material</string>
+    <string name="action_settings">Setting</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="explore">EXPLORE</string>
+    <string name="most_popular">Most Popular</string>
+    <string name="highest_rated">Highest Rated</string>
+    <string name="favourites">Favourites</string>
+
+    <string name="read_more">Read More</string>
 </resources>

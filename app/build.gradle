@@ -19,8 +19,24 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots"
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.1'
+    compile 'com.android.support:design:23.2.1'
+    compile 'com.android.support:cardview-v7:23.2.1'
+
+//thred party
+    //image prossising
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    //searchbar
+    compile 'com.quinny898.library.persistentsearch:library:1.0.0-SNAPSHOT'
+    //Material Ripple Layout for api >= 14
+    compile 'com.balysv:material-ripple:1.0.2'
 }
