@@ -72,7 +72,8 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         .into(((ViewHolderSmall) holder).imageView);
                 break;
             case LAYOUT_LARGE:
-                Picasso.with(((ViewHolderLarge) holder).imageView.getContext()).load(post.getImageUrl());
+                Picasso.with(((ViewHolderLarge) holder).imageView.getContext()).load(post.getImageUrl())
+                        .into(((ViewHolderLarge) holder).imageView);
                 ((ViewHolderLarge) holder).titleView.setText(post.getTitle());
                 ((ViewHolderLarge) holder).overviewView.setText(post.getOverview());
 
