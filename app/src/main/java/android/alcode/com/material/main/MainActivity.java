@@ -1,6 +1,7 @@
 package android.alcode.com.material.main;
 
 import android.alcode.com.material.R;
+import android.alcode.com.material.detail.DetailActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -211,9 +212,9 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.OnAda
 
     @Override
     public void onItemSelected(String id) {
-//        Intent mMovieDetailIntent = new Intent(MainActivity.this, DetailActivity.class);
-//        mMovieDetailIntent.putExtra("id", id);
-//        startActivity(mMovieDetailIntent);
+        Intent postDetailIntent = new Intent(MainActivity.this, DetailActivity.class);
+        postDetailIntent.putExtra("id", id);
+        startActivity(postDetailIntent);
     }
 
     static class Adapter extends FragmentPagerAdapter {

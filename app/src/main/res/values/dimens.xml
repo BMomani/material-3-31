@@ -14,5 +14,7 @@
     <dimen name="card_view_vertical">2dp</dimen>
     <dimen name="card_view_radius">2dp</dimen>
 
+    <dimen name="detail_backdrop_height">256dp</dimen>
+
     <integer name="grid_columns">2</integer>
 </resources>
