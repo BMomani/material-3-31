@@ -1,10 +1,22 @@
 package android.alcode.com.material.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by MOMANI on 2016/03/23.
  * this class for detail Activity
  */
-public class PostDetails {
+public class PostDetails implements Parcelable {
+    public static final Parcelable.Creator<PostDetails> CREATOR = new Parcelable.Creator<PostDetails>() {
+        public PostDetails createFromParcel(Parcel in) {
+            return new PostDetails(in);
+        }
+
+        public PostDetails[] newArray(int size) {
+            return new PostDetails[size];
+        }
+    };
     private String id, imageUrl, posterUrl, title, subtitle, longDescription, fees, likes, category, subCategory, location, date, ownerId;
 
     public PostDetails() {
@@ -24,6 +36,23 @@ public class PostDetails {
         this.location = location;
         this.date = date;
         this.ownerId = ownerId;
+    }
+
+    public PostDetails(Parcel in) {
+        id = in.readString();
+        imageUrl = in.readString();
+        posterUrl = in.readString();
+        title = in.readString();
+        subtitle = in.readString();
+        longDescription = in.readString();
+        fees = in.readString();
+        likes = in.readString();
+        category = in.readString();
+        subCategory = in.readString();
+        location = in.readString();
+        date = in.readString();
+        ownerId = in.readString();
+
     }
 
     public String getId() {
@@ -128,6 +157,28 @@ public class PostDetails {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(imageUrl);
+        dest.writeString(posterUrl);
+        dest.writeString(title);
+        dest.writeString(subtitle);
+        dest.writeString(longDescription);
+        dest.writeString(fees);
+        dest.writeString(likes);
+        dest.writeString(category);
+        dest.writeString(subCategory);
+        dest.writeString(location);
+        dest.writeString(date);
+        dest.writeString(ownerId);
     }
 }
 
