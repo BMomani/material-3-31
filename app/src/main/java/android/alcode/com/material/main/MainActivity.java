@@ -1,8 +1,6 @@
-package android.alcode.com.material.activities;
+package android.alcode.com.material.main;
 
 import android.alcode.com.material.R;
-import android.alcode.com.material.adapters.PostAdapter;
-import android.alcode.com.material.fragments.PostListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;

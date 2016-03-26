@@ -1,4 +1,4 @@
-package android.alcode.com.material.adapters;
+package android.alcode.com.material.main;
 
 import android.alcode.com.material.R;
 import android.alcode.com.material.models.Post;

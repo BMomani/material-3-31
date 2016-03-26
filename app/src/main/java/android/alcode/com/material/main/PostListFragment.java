@@ -1,7 +1,6 @@
-package android.alcode.com.material.fragments;
+package android.alcode.com.material.main;
 
 import android.alcode.com.material.R;
-import android.alcode.com.material.adapters.PostAdapter;
 import android.alcode.com.material.databases.Database;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
