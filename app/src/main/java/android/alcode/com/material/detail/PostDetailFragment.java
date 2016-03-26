@@ -4,7 +4,6 @@ import android.alcode.com.material.R;
 import android.alcode.com.material.databases.Database;
 import android.alcode.com.material.models.PostDetails;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
@@ -14,12 +13,17 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +50,7 @@ public class PostDetailFragment extends Fragment {
     private ImageView mBackdrop;
 
     private FloatingActionButton fab;
+    private ShareActionProvider mShareActionProvider;
 
 
     public PostDetailFragment() {
@@ -72,29 +77,51 @@ public class PostDetailFragment extends Fragment {
         mCollapsingToolbarLayout.setExpandedTitleColor(ContextCompat.getColor(getContext(), R.color.transparent));
         mCollapsingToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(getContext(), R.color.transparent));
 
+        //((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(R.string.subtitle);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //mToolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_back));
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-            }
-        });
-        mToolbar.inflateMenu(R.menu.menu_detail);
-        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-
-                if (item.getItemId() == R.id.action_share) {
-                    String[] data = {PostDetailFragment.this.mPostDetails.getTitle()};
-                    startActivity(Intent.createChooser(shareIntent(data[0]), "Share Via"));
-                    return true;
-                }
-                return true;
-            }
-        });
-
+        setHasOptionsMenu(true);
         return v;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_detail, menu);
+        // Retrieve the share menu item
+        MenuItem menuItem = menu.findItem(R.id.action_share);
+
+        // Get the provider and hold onto it to set/change the share intent.
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+
+        if (mPostDetails != null) {
+            String[] data = {PostDetailFragment.this.mPostDetails.getTitle()};
+            mShareActionProvider.setShareIntent(shareIntent((data[0])));
+        }
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_share:
+                openShareIntent(PostDetailFragment.this.mPostDetails.getTitle());
+                return true;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void openShareIntent(String s) {
+        if (s != null) {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.post_extra_subject));
+            intent.putExtra(Intent.EXTRA_TEXT, s);
+            startActivity(Intent.createChooser(intent, getActivity().getString(R.string.share)));
+        }
     }
 
     @Override
@@ -111,10 +138,10 @@ public class PostDetailFragment extends Fragment {
                                 public void onGenerated(Palette palette) {
                                     //container.setBackgroundColor(ColorUtils.setAlphaComponent(palette.getMutedColor(mDefaultColor), 190)); //Opacity
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                        int colorDark = ContextCompat.getColor(getContext(), (R.color.colorPrimaryDark));
+                                        int colorTransparent = ContextCompat.getColor(getContext(), (R.color.transparent));
                                         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                                        getActivity().getWindow().setStatusBarColor(colorDark);
-                                        fab.setBackgroundTintList(ColorStateList.valueOf(colorDark));
+                                        getActivity().getWindow().setStatusBarColor(colorTransparent);
+                                        //fab.setBackgroundTintList(ColorStateList.valueOf(colorDark));
                                     }
                                     mCollapsingToolbarLayout.setContentScrimColor(ContextCompat.getColor(getContext(), (R.color.colorPrimaryTransparent)));
                                 }
