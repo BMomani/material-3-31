@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.graphics.Palette;
@@ -72,7 +73,7 @@ public class PostDetailFragment extends Fragment {
         mCollapsingToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(getContext(), R.color.transparent));
 
 
-        mToolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_back));
+        //mToolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_back));
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,7 +150,8 @@ public class PostDetailFragment extends Fragment {
 
 
     private void addToFavorites(View v) {
-
+        Snackbar.make(mCollapsingToolbarLayout, "add to favorite code", Snackbar.LENGTH_LONG)
+                .show();
     }
 
     public Intent shareIntent(String data) {
