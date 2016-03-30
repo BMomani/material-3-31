@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.OnAda
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        try {
-
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
@@ -76,12 +74,6 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.OnAda
 
             TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
             tabLayout.setupWithViewPager(viewPager);
-        } catch (Exception e) {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-            Toast.makeText(this, e.getCause().toString(), Toast.LENGTH_LONG).show();
-            Toast.makeText(this, e.getStackTrace().toString(), Toast.LENGTH_LONG).show();
-
-        }
     }
 
     private void setupViewPager(ViewPager viewPager) {
