@@ -17,4 +17,17 @@
     <dimen name="detail_backdrop_height">256dp</dimen>
 
     <integer name="grid_columns">2</integer>
+
+
+    <dimen name="text_size">18sp</dimen>
+
+    <dimen name="login_box_layout_width">320dp</dimen>
+    <dimen name="HorizontalDivider_height">250dp</dimen>
+
+
+    <dimen name="login_box_layout_margin">0dp</dimen>
+    <dimen name="footer_layout_height">40dp</dimen>
+    <dimen name="social_buttons_padding">30dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

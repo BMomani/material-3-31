@@ -17,7 +17,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE-FIREBASE.txt'
+        exclude 'META-INF/NOTICE'
+    }
 }
+
 
 repositories {
     maven {
@@ -32,7 +38,13 @@ dependencies {
     compile 'com.android.support:design:23.2.1'
     compile 'com.android.support:cardview-v7:23.2.1'
     compile 'com.android.support:recyclerview-v7:23.2.1'
-    compile 'com.android.support:palette-v7:23.0.1'
+    compile 'com.android.support:palette-v7:23.2.1'
+
+//firebase
+    compile 'com.firebase:firebase-client-android:2.5.2+'
+    //login sdks
+    compile 'com.facebook.android:facebook-android-sdk:4.+'
+    compile 'com.google.android.gms:play-services:8.4.0'
 
 //thred party
     //image prossising
