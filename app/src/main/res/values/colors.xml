@@ -5,7 +5,7 @@
     <color name="colorAccent">#4DB6AC</color>
     <color name="window_background">#FFF5F5F5</color>
     <color name="colorPrimaryTransparent">#59ED3B3B</color>
-
+    <color name="semi_transparent">#29000000</color>
 
     <color name="theme_play_detail_white_background">#FFFFFF</color>
     <color name="theme_play_detail_grey_background">#EEEEEE</color>

@@ -26,4 +26,9 @@
 
     </style>
 
+    <style name="AppTheme.FullTransparent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/semi_transparent</item>
+        <item name="android:navigationBarColor">@color/semi_transparent</item>
+    </style>
+
 </resources>

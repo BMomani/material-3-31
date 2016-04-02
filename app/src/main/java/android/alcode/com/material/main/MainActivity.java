@@ -2,6 +2,7 @@ package android.alcode.com.material.main;
 
 import android.alcode.com.material.R;
 import android.alcode.com.material.detail.DetailActivity;
+import android.alcode.com.material.signup.SignupActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -23,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
 import com.quinny898.library.persistentsearch.SearchBox;
 
 import java.util.ArrayList;
@@ -34,46 +36,59 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.OnAda
     private SearchBox search;
     private Toolbar toolbar;
 
+    private Firebase mRef;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mRef = new Firebase(getResources().getString(R.string.firebase_url));
+        if (mRef.getAuth() == null) {
+            loadLoginView();
+        }
+        search = (SearchBox) findViewById(R.id.search_box);
+        search.enableVoiceRecognition(this);
 
-            search = (SearchBox) findViewById(R.id.search_box);
-            search.enableVoiceRecognition(this);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-            toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-            });
-
-            mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                    this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-            mDrawerLayout.setDrawerListener(toggle);
-            toggle.syncState();
-
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-            if (navigationView != null) {
-                setupDrawerContent(navigationView);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
+        });
 
-            ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-            if (viewPager != null) {
-                setupViewPager(viewPager);
-            }
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        if (navigationView != null) {
+            setupDrawerContent(navigationView);
+        }
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        if (viewPager != null) {
+            setupViewPager(viewPager);
+        }
 
 
-            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-            tabLayout.setupWithViewPager(viewPager);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private void loadLoginView() {
+        Intent intent = new Intent(this, SignupActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     private void setupViewPager(ViewPager viewPager) {

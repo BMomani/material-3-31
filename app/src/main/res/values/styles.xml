@@ -44,5 +44,9 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AppTheme.FullTransparent" parent="@style/Theme.AppCompat.NoActionBar">
+
+    </style>
+
 
 </resources>
