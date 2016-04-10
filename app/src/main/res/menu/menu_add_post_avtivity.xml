@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="android.alcode.com.login.AddPostAvtivity.AddPostAvtivity">
+    <item
+        android:id="@+id/menu_send"
+        android:icon="@android:drawable/ic_menu_send"
+        android:title="Save"
+        tools:showAsAction="always" />
+</menu>
