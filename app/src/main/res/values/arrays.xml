@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="all_category">
+        <item>Electronics</item>
+        <item>Cars and Bikes</item>
+        <item>Real Estate</item>
+        <item>Home abd Furniture</item>
+        <item>Fashion</item>
+        <item>Services</item>
+        <item>Jobs</item>
+        <item>Job Seekers</item>
+    </string-array>
+
+    <string-array name="subcategory_cars">
+        <item>Cars</item>
+        <item>Motorcycle</item>
+        <item>Car Accessories</item>
+        <item>Other Cars</item>
+
+    </string-array>
+
+    <string-array name="subcategory_elictronices">
+        <item>Mobile</item>
+        <item>Computer</item>
+        <item>Laptop</item>
+        <item>Tablet</item>
+        <item>Video Games</item>
+        <item>Camera</item>
+        <item>DVD Player</item>
+        <item>Other Electronics</item>
+    </string-array>
+
+    <string-array name="subcategory_fashion">
+        <item>Clothes</item>
+        <item>Watches</item>
+        <item>Accessories</item>
+        <item>Bags</item>
+        <item>Sunglasses</item>
+        <item>Kids Clothes and Shoes</item>
+        <item>Baby Care Products and Toys</item>
+        <item>Other Fashion</item>
+    </string-array>
+
+
+</resources>

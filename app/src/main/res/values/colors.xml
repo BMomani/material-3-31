@@ -20,4 +20,7 @@
     <color name="theme_play_detail_title_tinytext">#555555</color>
     <color name="theme_play_detail_overview">#323232</color>
 
+    <!--tutolrial activity -->
+    <color name="tutorial_subtitleTextColor">#ffffff</color>
+    <color name="tutorial_titleTextColor">#ffffff</color>
 </resources>
