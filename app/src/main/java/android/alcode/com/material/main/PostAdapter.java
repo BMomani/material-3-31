@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +20,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.firebase.client.Query;
 import com.firebase.ui.FirebaseRecyclerAdapter;
+
+import java.util.Random;
 
 
 /**
@@ -64,6 +66,8 @@ public class PostAdapter extends FirebaseRecyclerAdapter<PostDetails, RecyclerVi
               /*  Picasso.with(((ViewHolderSmall) holder).imageView.getContext()).load(post.getImageUrl())
                         .into(((ViewHolderSmall) holder).imageView);*/
 
+                ((ViewHolderSmall) holder).titleView.setText(post.getTitle());
+
                 Glide.with(((ViewHolderSmall) holder).imageView.getContext())
                         .load(post.getImageUrl())
                         .diskCacheStrategy(DiskCacheStrategy.SOURCE)
@@ -100,9 +104,8 @@ public class PostAdapter extends FirebaseRecyclerAdapter<PostDetails, RecyclerVi
                         }
                     }
                 });
-
-
         }
+        setAnimation(holder.itemView, position);
     }
 
     @Override
@@ -122,8 +125,12 @@ public class PostAdapter extends FirebaseRecyclerAdapter<PostDetails, RecyclerVi
     private void setAnimation(View viewToAnimate, int position) {
         // If the bound view wasn't previously displayed on screen, it's animated
         if (position > lastPosition) {
-            Animation animation = AnimationUtils.loadAnimation(mAct, android.R.anim.slide_out_right);
-            viewToAnimate.startAnimation(animation);
+            ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            anim.setDuration(1000);
+            anim.setDuration(new Random().nextInt(501));
+            viewToAnimate.startAnimation(anim);
+            //Animation animation = AnimationUtils.loadAnimation(mAct, android.R.anim.fade_in);
+            //viewToAnimate.startAnimation(animation);
             lastPosition = position;
         }
     }
