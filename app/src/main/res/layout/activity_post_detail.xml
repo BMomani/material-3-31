@@ -4,5 +4,5 @@
     android:name="android.alcode.com.material.detail.PostDetailFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.DetailActivity"
+    tools:context=".detail.DetailActivity"
     tools:layout="@layout/fragment_post_detail" />

@@ -1,18 +1,36 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Base application theme NoActionBar. -->
+    <style name="BaseThemeNoActionBar" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowActionBarOverlay">true</item>
     </style>
+    <!-- Application theme. -->
+    <style name="AppTheme.NoActionBar" parent="BaseThemeNoActionBar"></style>
 
-    <style name="Theme.AppTheme" parent="AppTheme"></style>
+    <!-- Base application theme ActionBar. -->
+    <style name="BaseThemeActionBar" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowActionBarOverlay">true</item>
+    </style>
+    <!-- Application theme. -->
+    <style name="AppTheme.ActionBar" parent="BaseThemeActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.Transparent" parent="AppTheme.ActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/MyActionBar</item>
+    </style>
+
 
     <style name="AppTheme.Details" parent="@style/Theme.AppTheme" />
-
-
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

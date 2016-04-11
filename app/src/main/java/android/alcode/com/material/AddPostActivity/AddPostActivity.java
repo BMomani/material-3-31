@@ -1,4 +1,4 @@
-package android.alcode.com.material.AddPostAvtivity;
+package android.alcode.com.material.AddPostActivity;
 
 import android.Manifest;
 import android.alcode.com.material.R;

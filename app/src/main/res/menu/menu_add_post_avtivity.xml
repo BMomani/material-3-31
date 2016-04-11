@@ -4,6 +4,6 @@
     <item
         android:id="@+id/menu_send"
         android:icon="@android:drawable/ic_menu_send"
-        android:title="Save"
+        android:title="@string/com_facebook_share_button_text"
         tools:showAsAction="always" />
 </menu>

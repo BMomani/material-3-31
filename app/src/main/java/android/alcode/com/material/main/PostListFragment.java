@@ -70,10 +70,5 @@ public class PostListFragment extends Fragment {
 
         adapter = new PostAdapter(PostDetails.class, R.layout.layout_holder_movie_small, RecyclerView.ViewHolder.class, query, getActivity());
         recyclerView.setAdapter(adapter);
-
-
-
     }
-
-
 }

@@ -12,7 +12,6 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post_detail);
     }
 
-
     @Override
     protected void onStop() {
         super.onStop();

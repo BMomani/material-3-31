@@ -1,6 +1,6 @@
 package android.alcode.com.material.main;
 
-import android.alcode.com.material.AddPostAvtivity.AddPostActivity;
+import android.alcode.com.material.AddPostActivity.AddPostActivity;
 import android.alcode.com.material.R;
 import android.alcode.com.material.detail.DetailActivity;
 import android.alcode.com.material.models.Post;
