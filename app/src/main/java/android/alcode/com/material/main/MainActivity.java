@@ -1,13 +1,16 @@
 package android.alcode.com.material.main;
 
-import android.alcode.com.material.AddPostAvtivity.AddPostActivity;
 import android.alcode.com.material.R;
 import android.alcode.com.material.detail.DetailActivity;
+import android.alcode.com.material.models.Post;
+import android.alcode.com.material.models.PostDetails;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -31,22 +34,28 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements PostAdapter.OnAdapterItemSelectedListener {
 
+    public ArrayList<Post> list;
     DrawerLayout mDrawerLayout;
     private SearchBox search;
     private Toolbar toolbar;
-
-    private Firebase mRef;
-
+    private Firebase mref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mRef = new Firebase(getResources().getString(R.string.firebase_url));
-        if (mRef.getAuth() == null) {
+     /*try {
+         Firebase.setAndroidContext(this);
+         Firebase.getDefaultConfig().setPersistenceEnabled(true);
+     }
+     catch (Exception e)
+     {
+         Log.d("hoooo",e.toString());
+     }*/
 
-        }
+
         search = (SearchBox) findViewById(R.id.search_box);
         search.enableVoiceRecognition(this);
 
@@ -57,7 +66,8 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.OnAda
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AddPostActivity.class));
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
 
@@ -70,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.OnAda
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
             setupDrawerContent(navigationView);
-        }
+            }
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         if (viewPager != null) {
@@ -80,8 +90,30 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.OnAda
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-    }
 
+
+/*
+        try {
+
+
+            mref = new Firebase(Constants.mRef);
+            for (int i = 0; i < Database.getInstance().getAllPosts().size(); i++) {
+                mref.push().setValue(Database.postsDetails[i]);
+            }
+        }
+        catch (Exception e)
+        {
+            Log.d("Hi", e.toString());
+        }
+
+        */
+        // Toast.makeText(getApplicationContext(),"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",Toast.LENGTH_LONG).show();
+
+
+        // System.out.println("Size: "+list.size());
+
+        //  Toast.makeText(getApplicationContext(),"hhhhhhhhhhhhhhhhhhhhhhh",Toast.LENGTH_LONG).show();
+    }
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
@@ -219,10 +251,24 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.OnAda
     }
 
     @Override
-    public void onItemSelected(String id) {
+    public void onItemSelected(PostDetails id) {
+
+
+
         Intent postDetailIntent = new Intent(MainActivity.this, DetailActivity.class);
+        // postDetailIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         postDetailIntent.putExtra("id", id);
+
+
+        //postDetailIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        postDetailIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(postDetailIntent);
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
     }
 
     static class Adapter extends FragmentPagerAdapter {
@@ -252,5 +298,7 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.OnAda
         public CharSequence getPageTitle(int position) {
             return mFragmentTitles.get(position);
         }
+
+
     }
 }

@@ -6,7 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
@@ -16,8 +16,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 /**
  * Created by MOMANI on 2016/03/23.
@@ -47,7 +48,64 @@ public class PostDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
 
-        Picasso.with(mAct).load(postDetails.getPosterUrl())
+/*
+        try {
+            Glide.with(mAct)
+                    .load(postDetails.getPosterUrl())
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .into(((ViewHolderDetails) holder).getImageView());
+
+            Bitmap posterBitmap = ((BitmapDrawable) ((ViewHolderDetails) holder).getImageView().getDrawable()).getBitmap();
+            Palette.from(posterBitmap).generate(new Palette.PaletteAsyncListener() {
+                @Override
+                public void onGenerated(Palette palette) {
+                    //container.setBackgroundColor(ColorUtils.setAlphaComponent(palette.getMutedColor(mDefaultColor), 190)); //Opacity
+                    ((ViewHolderDetails) holder).getRatingsBackground().getDrawable().setColorFilter(palette.getVibrantColor(mDefaultColor), PorterDuff.Mode.MULTIPLY);
+                    ((ViewHolderDetails) holder).getGenreBackground().getDrawable().setColorFilter(palette.getVibrantColor(mDefaultColor), PorterDuff.Mode.MULTIPLY);
+                    ((ViewHolderDetails) holder).getPopBackground().getDrawable().setColorFilter(palette.getVibrantColor(mDefaultColor), PorterDuff.Mode.MULTIPLY);
+                    ((ViewHolderDetails) holder).getLangBackground().getDrawable().setColorFilter(palette.getVibrantColor(mDefaultColor), PorterDuff.Mode.MULTIPLY);
+
+                }
+            });
+
+        }
+        catch (Exception e)
+        {
+            Log.d("Brie",e.toString());
+        }
+*/
+
+
+        Glide.with(mAct).load(postDetails.getPosterUrl()).into(((ViewHolderDetails) holder).getImageView());
+        Glide.with(mAct)
+                .load(postDetails.getPosterUrl())
+                .asBitmap().diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .into(new BitmapImageViewTarget(((ViewHolderDetails) holder).getImageView()) {
+                    @Override
+                    protected void setResource(Bitmap resource) {
+//                        Bitmap posterBitmap = ((BitmapDrawable) ((ViewHolderDetails) holder).getImageView().getDrawable()).getBitmap();
+                        ((ViewHolderDetails) holder).getImageView().setImageBitmap(resource);
+                        Palette.from(resource).generate(new Palette.PaletteAsyncListener() {
+                            @Override
+                            public void onGenerated(Palette palette) {
+                                //container.setBackgroundColor(ColorUtils.setAlphaComponent(palette.getMutedColor(mDefaultColor), 190)); //Opacity
+                                ((ViewHolderDetails) holder).getRatingsBackground().getDrawable().setColorFilter(palette.getVibrantColor(mDefaultColor), PorterDuff.Mode.MULTIPLY);
+                                ((ViewHolderDetails) holder).getGenreBackground().getDrawable().setColorFilter(palette.getVibrantColor(mDefaultColor), PorterDuff.Mode.MULTIPLY);
+                                ((ViewHolderDetails) holder).getPopBackground().getDrawable().setColorFilter(palette.getVibrantColor(mDefaultColor), PorterDuff.Mode.MULTIPLY);
+                                ((ViewHolderDetails) holder).getLangBackground().getDrawable().setColorFilter(palette.getVibrantColor(mDefaultColor), PorterDuff.Mode.MULTIPLY);
+
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onLoadFailed(Exception e, Drawable errorDrawable) {
+
+
+                    }
+                });
+
+     /*   Picasso.with(mAct).load(postDetails.getPosterUrl())
                 .into(((ViewHolderDetails) holder).getImageView(), new Callback() {
                     @Override
                     public void onSuccess() {
@@ -70,6 +128,7 @@ public class PostDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
                     }
                 });
+       */
         ((ViewHolderDetails) holder).getTitleView().setText(postDetails.getTitle());
         ((ViewHolderDetails) holder).getTaglineView().setText(postDetails.getSubtitle());
         ((ViewHolderDetails) holder).getDurationView().setText(postDetails.getFees());

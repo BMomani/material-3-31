@@ -1,11 +1,10 @@
 package android.alcode.com.material.detail;
 
 import android.alcode.com.material.R;
-import android.alcode.com.material.databases.Database;
 import android.alcode.com.material.models.PostDetails;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -30,8 +29,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 /**
  * Created by MOMANI on 2016/03/23.
@@ -62,8 +62,8 @@ public class PostDetailFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_post_detail, container, false);
 
         //grab any data from other Activity
-        id = getActivity().getIntent().getStringExtra("id");
-        mPostDetails = Database.getInstance().getMovieDetailsFromID(id);
+        //  id = getActivity().getIntent().getStringExtra("id");
+        mPostDetails = (PostDetails) (getActivity().getIntent().getParcelableExtra("id"));
 
         mRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_movie_details);
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) v.findViewById(R.id.collapsing_toolbar);
@@ -127,8 +127,93 @@ public class PostDetailFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
 
-        if (null != mPostDetails)
-            Picasso.with(getContext()).load(mPostDetails.getImageUrl())
+        // if (null != mPostDetails)
+
+/*
+        try {
+            Glide.with(getActivity())
+                    .load(mPostDetails.getImageUrl()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(mBackdrop);
+
+            Bitmap posterBitmap = ((BitmapDrawable) mBackdrop.getDrawable()).getBitmap();
+            Palette.from(posterBitmap).
+
+                    generate(new Palette.PaletteAsyncListener() {
+                        @Override
+                        public void onGenerated(Palette palette) {
+                            //container.setBackgroundColor(ColorUtils.setAlphaComponent(palette.getMutedColor(mDefaultColor), 190)); //Opacity
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                int colorTransparent = ContextCompat.getColor(getContext(), (R.color.transparent));
+                                getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                                getActivity().getWindow().setStatusBarColor(colorTransparent);
+                                //fab.setBackgroundTintList(ColorStateList.valueOf(colorDark));
+
+                            }
+                            mCollapsingToolbarLayout.setContentScrimColor(ContextCompat.getColor(getContext(), (R.color.colorPrimaryTransparent)));
+                        }
+                    });
+        }
+        catch (Exception e)
+        {
+            Log.d("bitttt",e.toString());
+        }
+*/
+/*
+        Glide.with(getActivity())
+                .load(mPostDetails.getImageUrl())
+                .listener(new RequestListener<String, GlideDrawable>() {
+                    @Override
+                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                           Bitmap posterBitmap = BitmapFactory.decodeResource(getActivity().getResources(),
+                                  );
+
+                        return false;
+                    }
+                })
+                .into(mBackdrop);
+*/
+
+        // Glide.with(getActivity()).load(mPostDetails.getImageUrl()).into(mBackdrop);
+        Glide.with(getActivity())
+                .load(mPostDetails.getImageUrl())
+                .asBitmap().diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .into(new BitmapImageViewTarget(mBackdrop) {
+                    @Override
+                    protected void setResource(Bitmap resource) {
+                        //    Bitmap posterBitmap = ((BitmapDrawable) mBackdrop.getDrawable()).getBitmap();
+                        mBackdrop.setImageBitmap(resource);
+                        Palette.from(resource).
+
+                                generate(new Palette.PaletteAsyncListener() {
+                                    @Override
+                                    public void onGenerated(Palette palette) {
+                                        //container.setBackgroundColor(ColorUtils.setAlphaComponent(palette.getMutedColor(mDefaultColor), 190)); //Opacity
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                            int colorTransparent = ContextCompat.getColor(getContext(), (R.color.transparent));
+                                            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                                            getActivity().getWindow().setStatusBarColor(colorTransparent);
+                                            //fab.setBackgroundTintList(ColorStateList.valueOf(colorDark));
+
+                                        }
+                                        mCollapsingToolbarLayout.setContentScrimColor(ContextCompat.getColor(getContext(), (R.color.colorPrimaryTransparent)));
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onLoadFailed(Exception e, Drawable errorDrawable) {
+
+
+                    }
+                });
+
+
+      /*      Picasso.with(getContext()).load(mPostDetails.getImageUrl())
                     .into(mBackdrop, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -142,6 +227,7 @@ public class PostDetailFragment extends Fragment {
                                         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                                         getActivity().getWindow().setStatusBarColor(colorTransparent);
                                         //fab.setBackgroundTintList(ColorStateList.valueOf(colorDark));
+
                                     }
                                     mCollapsingToolbarLayout.setContentScrimColor(ContextCompat.getColor(getContext(), (R.color.colorPrimaryTransparent)));
                                 }
@@ -153,7 +239,7 @@ public class PostDetailFragment extends Fragment {
 
                         }
                     });
-
+*/
         mCollapsingToolbarLayout.setTitle(mPostDetails.getTitle());
 
         mLayoutManager = new LinearLayoutManager(getActivity());

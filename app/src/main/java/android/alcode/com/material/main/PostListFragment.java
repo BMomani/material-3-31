@@ -1,10 +1,11 @@
 package android.alcode.com.material.main;
 
 import android.alcode.com.material.R;
-import android.alcode.com.material.databases.Database;
+import android.alcode.com.material.models.PostDetails;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,22 +13,39 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.firebase.client.Firebase;
+import com.firebase.client.Query;
+
 /**
  * Created by MOMANI on 2016/03/22.
  */
+
 public class PostListFragment extends Fragment {
 
     RecyclerView mRecyclerView;
+    PostAdapter adapter;
     private int gridColumns;
+    private SwipeRefreshLayout mSwip;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         gridColumns = getResources().getInteger(R.integer.grid_columns);
-        mRecyclerView = (RecyclerView) inflater.inflate(
+        View v = inflater.inflate(
                 R.layout.fragment_post_list, container, false);
+        mSwip = (SwipeRefreshLayout) v.findViewById(R.id.swipeRefreshLayout);
+
+        mSwip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                adapter.notifyDataSetChanged();
+                mSwip.setRefreshing(false);
+            }
+        });
+        mRecyclerView = (RecyclerView) v.findViewById(R.id.recyclerview);
+
         setupRecyclerView(mRecyclerView);
-        return mRecyclerView;
+        return v;
     }
 
     private void setupRecyclerView(RecyclerView recyclerView) {
@@ -45,8 +63,17 @@ public class PostListFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        PostAdapter adapter = new PostAdapter(Database.getInstance().getAllPosts(), getActivity());
+
+        Firebase mRef = new Firebase(getString(R.string.firebase_url));
+        Query query = mRef.limitToFirst(12);
+
+
+        adapter = new PostAdapter(PostDetails.class, R.layout.layout_holder_movie_small, RecyclerView.ViewHolder.class, query, getActivity());
         recyclerView.setAdapter(adapter);
+
+
+
     }
+
 
 }
