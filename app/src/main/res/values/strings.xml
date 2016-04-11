@@ -90,7 +90,7 @@
     <string name="slide_4_different_languages">Available in different languages</string>
     <string name="view_sample_tut">View Tutorial Example</string>
     <string name="slide_1_tech_firebase">Firebase by Google</string>
-    <string name="slide_1_tech_firebase_subtitle">Firebase is a complete platform for building mobile and web applications. user authentication, Firebase provides a realtime JSON database for storing and sync your app\'s data, ...</string>
+    <string name="slide_1_tech_firebase_subtitle">Firebase provides a realtime JSON database for storing and sync your app\'s data, user authentication ...</string>
     <string name="slide_2_tech_glide">Glide</string>
     <string name="slide_2_tech_glide_subtitle">An image loading and caching library for Android focused on smooth scrolling.</string>
     <string name="slide_3_tech_cloudinary_subtitle">Seamlessly manage your website\'s images in the cloud - image upload, cloud storage, image manipulation, image API and fast CDN.</string>
