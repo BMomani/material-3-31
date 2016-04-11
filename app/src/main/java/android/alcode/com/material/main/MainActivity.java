@@ -1,5 +1,6 @@
 package android.alcode.com.material.main;
 
+import android.alcode.com.material.AddPostAvtivity.AddPostActivity;
 import android.alcode.com.material.R;
 import android.alcode.com.material.detail.DetailActivity;
 import android.alcode.com.material.models.Post;
@@ -10,7 +11,6 @@ import android.os.PersistableBundle;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -46,14 +46,6 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.OnAda
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-     /*try {
-         Firebase.setAndroidContext(this);
-         Firebase.getDefaultConfig().setPersistenceEnabled(true);
-     }
-     catch (Exception e)
-     {
-         Log.d("hoooo",e.toString());
-     }*/
 
 
         search = (SearchBox) findViewById(R.id.search_box);
@@ -66,8 +58,7 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.OnAda
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(MainActivity.this, AddPostActivity.class));
             }
         });
 
