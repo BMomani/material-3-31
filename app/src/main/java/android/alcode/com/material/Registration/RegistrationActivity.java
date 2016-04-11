@@ -96,7 +96,10 @@ public class RegistrationActivity extends AppCompatActivity implements OnFragmen
     }
 
     private void goToMainActivity() {
-        startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
+        Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
         //Toast.makeText(getApplicationContext(), "Go to main Activity", Toast.LENGTH_LONG).show();
     }
 
