@@ -1,4 +1,4 @@
-package android.alcode.com.material.Registration;
+package android.alcode.com.material.registration;
 
 import android.alcode.com.material.R;
 import android.content.Context;

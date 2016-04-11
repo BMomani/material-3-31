@@ -1,9 +1,9 @@
-package android.alcode.com.material.AddPostActivity;
+package android.alcode.com.material.newpost;
 
 import android.Manifest;
 import android.alcode.com.material.R;
-import android.alcode.com.material.Uitility.ImagePicker;
-import android.alcode.com.material.Uitility.PermissionUtility;
+import android.alcode.com.material.utils.ImagePicker;
+import android.alcode.com.material.utils.PermissionUtility;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;

@@ -1,10 +1,10 @@
 package android.alcode.com.material.main;
 
-import android.alcode.com.material.AddPostActivity.AddPostActivity;
 import android.alcode.com.material.R;
 import android.alcode.com.material.detail.DetailActivity;
 import android.alcode.com.material.models.Post;
 import android.alcode.com.material.models.PostDetails;
+import android.alcode.com.material.newpost.AddPostActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;

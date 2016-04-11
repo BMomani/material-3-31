@@ -12,7 +12,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -88,16 +87,16 @@ public class PostDetailFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_detail, menu);
-        // Retrieve the share menu item
-        MenuItem menuItem = menu.findItem(R.id.action_share);
-
-        // Get the provider and hold onto it to set/change the share intent.
-        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
-
-        if (mPostDetails != null) {
-            String[] data = {PostDetailFragment.this.mPostDetails.getTitle()};
-            mShareActionProvider.setShareIntent(shareIntent((data[0])));
-        }
+//        // Retrieve the share menu item
+//        MenuItem menuItem = menu.findItem(R.id.action_share);
+//
+//        // Get the provider and hold onto it to set/change the share intent.
+//        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+//
+//        if (mPostDetails != null) {
+//            String[] data = {PostDetailFragment.this.mPostDetails.getTitle()};
+//            mShareActionProvider.setShareIntent(shareIntent((data[0])));
+//        }
 
     }
 

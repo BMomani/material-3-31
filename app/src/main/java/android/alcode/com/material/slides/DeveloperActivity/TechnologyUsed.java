@@ -1,7 +1,7 @@
-package android.alcode.com.material.SlidesActivities.DeveloperActivity;
+package android.alcode.com.material.slides.DeveloperActivity;
 
 import android.alcode.com.material.R;
-import android.alcode.com.material.SlidesActivities.MaterialTutorialSlide;
+import android.alcode.com.material.slides.MaterialTutorialSlide;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

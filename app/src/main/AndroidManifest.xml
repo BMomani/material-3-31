@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.ActionBar">
         <activity
-            android:name=".Registration.RegistrationActivity"
+            android:name=".registration.RegistrationActivity"
             android:theme="@style/AppTheme.ActionBar.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +34,7 @@
                 android:value=".main.MainActivity" />
         </activity>
         <activity
-            android:name=".AddPostActivity.AddPostActivity"
+            android:name=".newpost.AddPostActivity"
             android:label="@string/title_activity_add_post_avtivity"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -43,12 +43,12 @@
         <!-- Slides -->
         <activity
 
-            android:name=".SlidesActivities.AppIntroActivity.AppTutorial"
+            android:name=".slides.AppIntroActivity.AppTutorial"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
         <activity
-            android:name=".SlidesActivities.DeveloperActivity.TechnologyUsed"
+            android:name=".slides.DeveloperActivity.TechnologyUsed"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>

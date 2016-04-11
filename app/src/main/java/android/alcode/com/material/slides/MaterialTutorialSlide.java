@@ -1,4 +1,4 @@
-package android.alcode.com.material.SlidesActivities;
+package android.alcode.com.material.slides;
 
 import android.alcode.com.material.R;
 import android.os.Bundle;

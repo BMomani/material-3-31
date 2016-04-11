@@ -1,4 +1,4 @@
-package android.alcode.com.material.Uitility;
+package android.alcode.com.material.utils;
 
 
 import android.alcode.com.material.R;

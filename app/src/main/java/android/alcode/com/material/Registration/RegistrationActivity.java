@@ -1,9 +1,9 @@
-package android.alcode.com.material.Registration;
+package android.alcode.com.material.registration;
 
 import android.alcode.com.material.R;
-import android.alcode.com.material.SlidesActivities.AppIntroActivity.AppTutorial;
-import android.alcode.com.material.SlidesActivities.DeveloperActivity.TechnologyUsed;
 import android.alcode.com.material.main.MainActivity;
+import android.alcode.com.material.slides.AppIntroActivity.AppTutorial;
+import android.alcode.com.material.slides.DeveloperActivity.TechnologyUsed;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
