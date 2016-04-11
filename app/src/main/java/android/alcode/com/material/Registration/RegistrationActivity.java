@@ -1,8 +1,9 @@
-package android.alcode.com.material.RegisrationActivity;
+package android.alcode.com.material.Registration;
 
 import android.alcode.com.material.R;
 import android.alcode.com.material.SlidesActivities.AppIntroActivity.AppTutorial;
 import android.alcode.com.material.SlidesActivities.DeveloperActivity.TechnologyUsed;
+import android.alcode.com.material.main.MainActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +17,6 @@ import android.view.MenuItem;
 import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import java.lang.reflect.Field;
 
@@ -80,10 +80,10 @@ public class RegistrationActivity extends AppCompatActivity implements OnFragmen
             fragment = SignupFragment.newInstance();
             tag = SignupFragment.TAG;
         } else if (event.equals("register_later")) {//register
-            Toast.makeText(getApplicationContext(), "Go to main Activity", Toast.LENGTH_LONG).show();
+            goToMainActivity();
             return;
         } else if (event.equals("logged_in")) {//register
-            Toast.makeText(getApplicationContext(), "Go to main Activity", Toast.LENGTH_LONG).show();
+            goToMainActivity();
             return;
         } else {
             return;
@@ -93,6 +93,11 @@ public class RegistrationActivity extends AppCompatActivity implements OnFragmen
         //transaction.remove(fragmentManager.findFragmentByTag(SignupOrLoginFragment.TAG));
         transaction.commit();
 
+    }
+
+    private void goToMainActivity() {
+        startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
+        //Toast.makeText(getApplicationContext(), "Go to main Activity", Toast.LENGTH_LONG).show();
     }
 
     private void makeActionOverflowMenuShown() {

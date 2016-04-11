@@ -1,4 +1,4 @@
-package android.alcode.com.material.RegisrationActivity;
+package android.alcode.com.material.Registration;
 
 /**
  * Created by MOMANI on 2016/04/05.
