@@ -38,11 +38,13 @@ public class PostAdapter extends FirebaseRecyclerAdapter<PostDetails, RecyclerVi
     private int mDefaultColor;
     private LayoutInflater mInflater;
     private int lastPosition = -1;
+    private int gridColumns;
 
     public PostAdapter(Class<PostDetails> modelClass, int modelLayout, Class<RecyclerView.ViewHolder> viewHolderClass, Query ref, Activity activity) {
         super(modelClass, modelLayout, viewHolderClass, ref);
         this.mAct = activity;
 
+        gridColumns = activity.getResources().getInteger(R.integer.grid_columns);
         mDefaultColor = ContextCompat.getColor(activity.getApplicationContext(), (R.color.colorPrimaryTransparent));
         mInflater = (LayoutInflater) this.mAct.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mAdapterCallback = (OnAdapterItemSelectedListener) mAct;
@@ -137,7 +139,7 @@ public class PostAdapter extends FirebaseRecyclerAdapter<PostDetails, RecyclerVi
 
     @Override
     public int getItemViewType(int position) {
-        return ((position + 1) % 3 == 0 ? LAYOUT_LARGE : LAYOUT_SMALL);
+        return ((position + 1) % (gridColumns + 1) == 0 ? LAYOUT_LARGE : LAYOUT_SMALL);
     }
 
 

@@ -53,7 +53,7 @@ public class PostListFragment extends Fragment {
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if ((position + 1) % 3 == 0)
+                if ((position + 1) % (gridColumns + 1) == 0)
                     return gridColumns;
                 else
                     return 1;
@@ -63,10 +63,8 @@ public class PostListFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
-        Firebase mRef = new Firebase(getString(R.string.firebase_url));
+        Firebase mRef = new Firebase(getString(R.string.firebase_url)).child("Items");
         Query query = mRef.limitToFirst(12);
-
 
         adapter = new PostAdapter(PostDetails.class, R.layout.layout_holder_movie_small, RecyclerView.ViewHolder.class, query, getActivity());
         recyclerView.setAdapter(adapter);
