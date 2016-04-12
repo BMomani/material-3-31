@@ -4,11 +4,11 @@ import android.alcode.com.material.R;
 import android.alcode.com.material.models.PostDetails;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -17,7 +17,6 @@ import android.support.v7.graphics.Palette;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -48,8 +48,9 @@ public class PostDetailFragment extends Fragment {
     private Toolbar mToolbar;
     private ImageView mBackdrop;
 
-    private FloatingActionButton fab;
-    private ShareActionProvider mShareActionProvider;
+    private AnimationDrawable animationDrawable, AniDraw;
+    private int flag = 0;
+    private ImageView fab;
 
 
     public PostDetailFragment() {
@@ -70,9 +71,7 @@ public class PostDetailFragment extends Fragment {
         mBackdrop = (ImageView) v.findViewById(R.id.backdrop);
 
 
-        fab = (FloatingActionButton) v.findViewById(R.id.fab);
-
-
+        fab = (ImageView) v.findViewById(R.id.fab);
         mCollapsingToolbarLayout.setExpandedTitleColor(ContextCompat.getColor(getContext(), R.color.transparent));
         mCollapsingToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(getContext(), R.color.transparent));
 
@@ -250,9 +249,12 @@ public class PostDetailFragment extends Fragment {
         }
 
         //register our review content listener
-        fab.setOnClickListener(new View.OnClickListener() {
+        fab.setImageResource(R.drawable.animation);
+        animationDrawable = (AnimationDrawable) fab.getDrawable();
+        fab.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                runAnimation();
                 addToFavorites(v);
             }
         });
@@ -264,6 +266,22 @@ public class PostDetailFragment extends Fragment {
     private void addToFavorites(View v) {
         Snackbar.make(mCollapsingToolbarLayout, "add to favorite code", Snackbar.LENGTH_LONG)
                 .show();
+    }
+
+    private void runAnimation() {
+        if (flag == 0) {//按钮动画开始
+            fab.setBackgroundResource(R.drawable.animation);
+            animationDrawable.start();
+            fab.setImageDrawable(animationDrawable.getFrame(28));
+            flag = 1;
+
+        } else if (flag == 1) {//按钮复原
+            animationDrawable.selectDrawable(0);//回到第一帧
+            animationDrawable.stop();
+            fab.setImageDrawable(animationDrawable.getFrame(0));
+            ;
+            flag = 0;
+        }
     }
 
     public Intent shareIntent(String data) {
