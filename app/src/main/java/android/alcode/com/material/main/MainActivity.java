@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.quinny898.library.persistentsearch.SearchBox;
+import com.quinny898.library.persistentsearch.SearchResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -221,15 +222,20 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.OnAda
             }
 
             @Override
-            public void onSearchTermChanged() {
-                // React to the search term changing
-                // Called after it has updated results
+            public void onSearchTermChanged(String s) {
+
             }
+
 
             @Override
             public void onSearch(String searchTerm) {
                 Toast.makeText(MainActivity.this, searchTerm + " Searched",
                         Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onResultClick(SearchResult searchResult) {
 
             }
 

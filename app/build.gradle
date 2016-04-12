@@ -24,7 +24,6 @@ android {
     }
 }
 
-
 repositories {
     maven {
         url "https://oss.sonatype.org/content/repositories/snapshots"
@@ -59,7 +58,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
     //searchbar
-    compile 'com.quinny898.library.persistentsearch:library:1.0.0-SNAPSHOT'
+    compile 'com.quinny898.library.persistentsearch:library:1.1.0-SNAPSHOT'
 
     //Material Ripple Layout for api >= 14
     compile 'com.balysv:material-ripple:1.0.2'
