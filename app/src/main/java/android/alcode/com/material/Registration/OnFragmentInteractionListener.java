@@ -15,5 +15,5 @@ package android.alcode.com.material.registration;
  * >Communicating with Other Fragments</a> for more information.
  */
 public interface OnFragmentInteractionListener {
-    void onFragmentInteraction(String event);
+    void onFragmentInteraction(String event, String... params);
 }

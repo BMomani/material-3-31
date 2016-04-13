@@ -66,7 +66,7 @@ public class RegistrationActivity extends AppCompatActivity implements OnFragmen
     }
 
     @Override
-    public void onFragmentInteraction(String event) {
+    public void onFragmentInteraction(String event, String... params) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
@@ -74,7 +74,11 @@ public class RegistrationActivity extends AppCompatActivity implements OnFragmen
         Fragment fragment;
         String tag;
         if (event.equals("login_with_email")) {
-            fragment = LoginFragment.newInstance();
+            if (params.length == 0) {
+                fragment = LoginFragment.newInstance();
+            } else {
+                fragment = LoginFragment.newInstance(params[0], params[1]);
+            }
             tag = LoginFragment.TAG;
         } else if (event.equals("register_with_email")) {//register
             fragment = SignupFragment.newInstance();

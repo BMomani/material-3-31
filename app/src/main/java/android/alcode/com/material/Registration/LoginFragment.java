@@ -29,6 +29,8 @@ import java.util.Map;
  */
 public class LoginFragment extends Fragment {
     public static final String TAG = LoginFragment.class.getSimpleName();
+    private static final String EMAIL_KEY = "email";
+    private static final String PASSWORD_KEY = "password";
 
     /* A mFirebaseReference to the Firebase */
     Firebase mFirebaseRef;
@@ -51,6 +53,21 @@ public class LoginFragment extends Fragment {
      */
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
+        return fragment;
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @return A new instance of fragment LoginFragment.
+     */
+    public static LoginFragment newInstance(String email, String password) {
+        LoginFragment fragment = new LoginFragment();
+        Bundle args = new Bundle();
+        args.putString(EMAIL_KEY, email);
+        args.putString(PASSWORD_KEY, password);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -86,7 +103,13 @@ public class LoginFragment extends Fragment {
         mAuthProgressDialog.setMessage("Authenticating with Firebase...");
         mAuthProgressDialog.setCancelable(false);
         mTextViewEmail = (TextView) getActivity().findViewById(R.id.email);
+        String emailTest = (String) getArguments().get(EMAIL_KEY);
+        if (null != emailTest)
+            mTextViewEmail.setText(emailTest + "");
         mTextViewPassword = (TextView) getActivity().findViewById(R.id.password);
+        String passwordText = (String) getArguments().get(PASSWORD_KEY);
+        if (null != passwordText)
+            mTextViewEmail.setText(passwordText + "");
 
         mLoginPasswordButton = (Button) getActivity().findViewById(R.id.email_sign_in_button);
         mLoginPasswordButton.setOnClickListener(new View.OnClickListener() {

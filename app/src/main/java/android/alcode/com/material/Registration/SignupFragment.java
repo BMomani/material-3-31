@@ -3,6 +3,7 @@ package android.alcode.com.material.registration;
 import android.alcode.com.material.R;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -34,6 +35,7 @@ public class SignupFragment extends Fragment {
     private Button mLoginPasswordButton;
     /* A dialog that is presented until the Firebase authentication finished. */
     private ProgressDialog mAuthProgressDialog;
+    private OnFragmentInteractionListener mListener;
 
     public SignupFragment() {
         // Required empty public constructor
@@ -125,8 +127,12 @@ public class SignupFragment extends Fragment {
                             .setPositiveButton(R.string.login_button_label, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                    fragmentManager.popBackStack();
+                                    if (mListener != null) {
+                                        mListener.onFragmentInteraction("login_with_email");
+                                    }
+                                    //FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                    //fragmentManager.popBackStack();
+                                    //-----
                                     //fragmentManager.beginTransaction().replace(R.id.fragment_container, fragmentManager.findFragmentByTag(LoginFragment.TAG)).commit();
 //                                    Intent intent = new Intent(getActivity(), LoginActivity.class);
 //                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -167,4 +173,22 @@ public class SignupFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
 }
