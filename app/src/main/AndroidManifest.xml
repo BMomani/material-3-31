@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
     <application
         android:name=".TheApplication"
         android:allowBackup="true"
@@ -15,16 +14,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.ActionBar">
         <activity
-            android:name=".registration.RegistrationActivity"
-            android:theme="@style/AppTheme.ActionBar.Transparent">
+            android:name=".splash.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
+            android:name=".registration.RegistrationActivity"
+            android:parentActivityName=".main.MainActivity"
+            android:theme="@style/AppTheme.ActionBar.Transparent">
+
+        </activity>
+        <activity
             android:name=".main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".detail.DetailActivity"
             android:parentActivityName=".main.MainActivity"
@@ -34,24 +40,24 @@
                 android:value=".main.MainActivity" />
         </activity>
         <activity
+            android:name=".userprofile.UserProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".main.MainActivity"></meta-data>
+        </activity>
+        <activity
             android:name=".newpost.AddPostActivity"
             android:label="@string/title_activity_add_post_avtivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- Slides -->
         <activity
-
             android:name=".slides.AppIntroActivity.AppTutorial"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".slides.DeveloperActivity.TechnologyUsed"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.FullTransparent" />
     </application>
 
 </manifest>

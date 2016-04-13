@@ -99,4 +99,7 @@
     <string name="slide_4_tech_github_subtitle">GitHub is a web-based Git repository hosting service. It offers all of the distributed revision control and source code management</string>
     <string name="are_you_develover">Are You Develover</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

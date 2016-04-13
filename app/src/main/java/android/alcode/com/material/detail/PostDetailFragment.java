@@ -255,7 +255,7 @@ public class PostDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 runAnimation();
-                addToFavorites(v);
+                addToOrRemoveFromFavorites(v);
             }
         });
 
@@ -263,23 +263,21 @@ public class PostDetailFragment extends Fragment {
     }
 
 
-    private void addToFavorites(View v) {
+    private void addToOrRemoveFromFavorites(View v) {
         Snackbar.make(mCollapsingToolbarLayout, "add to favorite code", Snackbar.LENGTH_LONG)
                 .show();
     }
 
     private void runAnimation() {
-        if (flag == 0) {//按钮动画开始
+        if (flag == 0) {
             fab.setBackgroundResource(R.drawable.animation);
             animationDrawable.start();
-            fab.setImageDrawable(animationDrawable.getFrame(28));
+            //fab.setImageDrawable(animationDrawable.getFrame(28));
             flag = 1;
 
-        } else if (flag == 1) {//按钮复原
-            animationDrawable.selectDrawable(0);//回到第一帧
+        } else if (flag == 1) {
+            animationDrawable.selectDrawable(0);
             animationDrawable.stop();
-            fab.setImageDrawable(animationDrawable.getFrame(0));
-            ;
             flag = 0;
         }
     }

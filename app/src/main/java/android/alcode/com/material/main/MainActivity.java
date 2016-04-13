@@ -5,7 +5,12 @@ import android.alcode.com.material.detail.DetailActivity;
 import android.alcode.com.material.models.Post;
 import android.alcode.com.material.models.PostDetails;
 import android.alcode.com.material.newpost.AddPostActivity;
+import android.alcode.com.material.userprofile.UserProfileActivity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.speech.RecognizerIntent;
@@ -24,8 +29,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.firebase.client.Firebase;
 import com.quinny898.library.persistentsearch.SearchBox;
 import com.quinny898.library.persistentsearch.SearchResult;
@@ -36,15 +46,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements PostAdapter.OnAdapterItemSelectedListener {
 
     public ArrayList<Post> list;
-    DrawerLayout mDrawerLayout;
+    protected DrawerLayout mDrawerLayout;
     private SearchBox search;
     private Toolbar toolbar;
     private Firebase mref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -71,40 +79,17 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.OnAda
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
+            setupNavigationHeader(navigationView);
             setupDrawerContent(navigationView);
-            }
+        }
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         if (viewPager != null) {
             setupViewPager(viewPager);
         }
 
-
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
-
-/*
-        try {
-
-
-            mref = new Firebase(Constants.mRef);
-            for (int i = 0; i < Database.getInstance().getAllPosts().size(); i++) {
-                mref.push().setValue(Database.postsDetails[i]);
-            }
-        }
-        catch (Exception e)
-        {
-            Log.d("Hi", e.toString());
-        }
-
-        */
-        // Toast.makeText(getApplicationContext(),"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",Toast.LENGTH_LONG).show();
-
-
-        // System.out.println("Size: "+list.size());
-
-        //  Toast.makeText(getApplicationContext(),"hhhhhhhhhhhhhhhhhhhhhhh",Toast.LENGTH_LONG).show();
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -114,6 +99,39 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.OnAda
         adapter.addFragment(new PostListFragment(), getString(R.string.favourites));
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(3);
+    }
+
+    private void setupNavigationHeader(NavigationView navigationView) {
+        //region find views
+        final View header = navigationView.getHeaderView(0);
+        ImageView userImageView = (ImageView) header.findViewById(R.id.imageView);
+        TextView usernameTextView = (TextView) header.findViewById(R.id.username_textView);
+        TextView emailTextView = (TextView) header.findViewById(R.id.email_textView);
+        //endregion
+        //region setBackgroundResource for header using glide
+//        header.setBackgroundResource(R.drawable.side_nav_bar);
+        Glide.with(this).load(R.drawable.side_nav_bar).asBitmap().into(new SimpleTarget<Bitmap>(304, (int) getResources().getDimension(R.dimen.nav_header_height)) {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                Drawable drawable = new BitmapDrawable(resource);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    header.setBackground(drawable);
+                }
+            }
+        });
+        //endregion
+        //region add OnClickListener for header
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int[] startingLocation = new int[2];
+                v.getLocationOnScreen(startingLocation);
+                startingLocation[0] += v.getWidth() / 2;
+                UserProfileActivity.startUserProfileFromLocation(startingLocation, MainActivity.this);
+                overridePendingTransition(0, 0);
+            }
+        });
+        //endregion
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -248,18 +266,23 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.OnAda
     }
 
     @Override
-    public void onItemSelected(PostDetails id) {
+    public void onItemSelected(View v, PostDetails id) {
 
 
+        int[] startingLocation = new int[2];
+        v.getLocationOnScreen(startingLocation);
+        startingLocation[0] += v.getWidth() / 2;
+        DetailActivity.startDetailActivityFromLocation(startingLocation, id, MainActivity.this);
+        overridePendingTransition(0, 0);
 
-        Intent postDetailIntent = new Intent(MainActivity.this, DetailActivity.class);
+//        Intent postDetailIntent = new Intent(MainActivity.this, DetailActivity.class);
         // postDetailIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        postDetailIntent.putExtra("id", id);
+//        postDetailIntent.putExtra("id", id);
 
 
         //postDetailIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        postDetailIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(postDetailIntent);
+        //postDetailIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //startActivity(postDetailIntent);
 
     }
 

@@ -60,7 +60,7 @@ public class PostAdapter extends FirebaseRecyclerAdapter<PostDetails, RecyclerVi
                     @Override
                     public void onClick(View v) {
                         if (mAdapterCallback != null) {
-                            mAdapterCallback.onItemSelected(post);
+                            mAdapterCallback.onItemSelected(v, post);
                         }
                     }
                 });
@@ -93,7 +93,7 @@ public class PostAdapter extends FirebaseRecyclerAdapter<PostDetails, RecyclerVi
                     @Override
                     public void onClick(View v) {
                         if (mAdapterCallback != null) {
-                            mAdapterCallback.onItemSelected(post);
+                            mAdapterCallback.onItemSelected(v, post);
                         }
                     }
                 });
@@ -102,7 +102,7 @@ public class PostAdapter extends FirebaseRecyclerAdapter<PostDetails, RecyclerVi
                     @Override
                     public void onClick(View v) {
                         if (mAdapterCallback != null) {
-                            mAdapterCallback.onItemSelected(post);
+                            mAdapterCallback.onItemSelected(v, post);
                         }
                     }
                 });
@@ -144,7 +144,7 @@ public class PostAdapter extends FirebaseRecyclerAdapter<PostDetails, RecyclerVi
 
 
     public interface OnAdapterItemSelectedListener {
-        void onItemSelected(PostDetails id);
+        void onItemSelected(View v, PostDetails id);
     }
 
 

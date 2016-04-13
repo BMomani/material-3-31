@@ -177,7 +177,7 @@ public class LoginFragment extends Fragment {
                     // Authenticated successfully with payload authData
                     Map<String, Object> map = new HashMap<String, Object>();
                     map.put("email", email);
-                    mFirebaseRef.child("users").child(authData.getUid()).updateChildren(map);
+                    mFirebaseRef.child("users").child(authData.getUid()).child("userInfo").updateChildren(map);
                     if (mListener != null) {
                         mListener.onFragmentInteraction("logged_in");
                     }
