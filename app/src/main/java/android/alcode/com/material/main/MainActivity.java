@@ -17,6 +17,8 @@ import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -269,20 +271,28 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.OnAda
     public void onItemSelected(View v, PostDetails id) {
 
 
-        int[] startingLocation = new int[2];
-        v.getLocationOnScreen(startingLocation);
-        startingLocation[0] += v.getWidth() / 2;
-        DetailActivity.startDetailActivityFromLocation(startingLocation, id, MainActivity.this);
-        overridePendingTransition(0, 0);
+//        int[] startingLocation = new int[2];
+//        v.getLocationOnScreen(startingLocation);
+//        startingLocation[0] += v.getWidth() / 2;
+//        DetailActivity.startDetailActivityFromLocation(startingLocation, id, MainActivity.this);
+//        overridePendingTransition(0, 0);
 
-//        Intent postDetailIntent = new Intent(MainActivity.this, DetailActivity.class);
-        // postDetailIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//        postDetailIntent.putExtra("id", id);
+        Intent postDetailIntent = new Intent(MainActivity.this, DetailActivity.class);
+//         postDetailIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        postDetailIntent.putExtra("id", id);
+
+        String transitionName = getString(R.string.transition_post_cover);
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this,
+                v,   // The view which starts the transition
+                transitionName    // The transitionName of the view we’re transitioning to
+        );
+        ActivityCompat.startActivity(MainActivity.this, postDetailIntent, options.toBundle());
 
 
         //postDetailIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         //postDetailIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         //startActivity(postDetailIntent);
+        //overridePendingTransition(R.anim.slide_bottom_in, android.R.anim.fade_out);
 
     }
 
