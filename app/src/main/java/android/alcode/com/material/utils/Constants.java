@@ -1,4 +1,4 @@
-package android.alcode.com.material;
+package android.alcode.com.material.utils;
 
 /**
  * Created by Hamzeh on 4/1/2016.

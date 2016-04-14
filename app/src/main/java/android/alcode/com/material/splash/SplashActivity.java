@@ -1,9 +1,9 @@
 package android.alcode.com.material.splash;
 
-import android.alcode.com.material.Constants;
 import android.alcode.com.material.R;
 import android.alcode.com.material.main.MainActivity;
 import android.alcode.com.material.registration.RegistrationActivity;
+import android.alcode.com.material.utils.Constants;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -38,6 +38,11 @@ public class SplashActivity extends AppCompatActivity {
         super.onResume();
         Thread timer = new Thread() {
             public void run() {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 loadAndParseConfig();
             }
         };
