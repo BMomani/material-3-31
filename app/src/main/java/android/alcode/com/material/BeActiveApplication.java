@@ -7,7 +7,7 @@ import com.firebase.client.Firebase;
 /**
  * Created by MOMANI on 2016/03/30.
  */
-public class TheApplication extends Application {
+public class BeActiveApplication extends Application {
 
     @Override
     public void onCreate() {
