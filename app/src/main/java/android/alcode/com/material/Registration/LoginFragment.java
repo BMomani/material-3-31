@@ -103,14 +103,15 @@ public class LoginFragment extends Fragment {
         mAuthProgressDialog.setMessage("Authenticating with Firebase...");
         mAuthProgressDialog.setCancelable(false);
         mTextViewEmail = (TextView) getActivity().findViewById(R.id.email);
-        String emailTest = (String) getArguments().get(EMAIL_KEY);
-        if (null != emailTest)
-            mTextViewEmail.setText(emailTest + "");
         mTextViewPassword = (TextView) getActivity().findViewById(R.id.password);
-        String passwordText = (String) getArguments().get(PASSWORD_KEY);
-        if (null != passwordText)
-            mTextViewEmail.setText(passwordText + "");
-
+        if (null != getArguments()) {
+            String emailTest = (String) getArguments().get(EMAIL_KEY);
+            if (null != emailTest)
+                mTextViewEmail.setText(emailTest + "");
+            String passwordText = (String) getArguments().get(PASSWORD_KEY);
+            if (null != passwordText)
+                mTextViewEmail.setText(passwordText + "");
+        }
         mLoginPasswordButton = (Button) getActivity().findViewById(R.id.email_sign_in_button);
         mLoginPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
